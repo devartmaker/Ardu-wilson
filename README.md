@@ -1,4 +1,4 @@
-# arduwilson
+# ardu-wilson
 You need to install below librarys.
 
 SimpleTimer
