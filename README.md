@@ -7,5 +7,6 @@ https://github.com/schinken/SimpleTimer
 Adafruit_NeoPixel
 - You can find this library in the library manager of Arduino IDE.
 
-Ref.
+
+Article
 http://devart.kr/blog/archives/349
