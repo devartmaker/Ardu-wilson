@@ -1,5 +1,5 @@
 # Ardu-wilson
-You need to install below librarys.
+You need to install below libraries.
 
 SimpleTimer
 https://github.com/schinken/SimpleTimer
