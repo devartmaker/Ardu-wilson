@@ -1,7 +1,9 @@
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(2, 9, NEO_RGB + NEO_KHZ800);
+
 int eyeTimerId = -1;
 int tgBrightness, brightness;
 bool blink = false;
+uint32_t eyeColor = pixels.Color(255, 228, 200);
 
 void initEyes() {
   pixels.begin();
@@ -14,8 +16,8 @@ void initEyes() {
 
 void openEyes() {
   tgBrightness = 50;
-  pixels.setPixelColor(0, 255, 255, 255);
-  pixels.setPixelColor(1, 255, 255, 255);
+  pixels.setPixelColor(0, eyeColor);
+  pixels.setPixelColor(1, eyeColor);
   pixels.show();
 }
 
@@ -45,12 +47,6 @@ void changeEyes() {
   } else if (tgBrightness > brightness) {
     brightness++;
   }
-
-  /*
-  Serial.print(brightness);
-  Serial.print("/");
-  Serial.println(blink);
-  */
   
   if (blink) {
     pixels.setBrightness(0);
@@ -58,8 +54,7 @@ void changeEyes() {
     pixels.setBrightness(brightness);
   }
 
-  pixels.setPixelColor(0, 255, 255, 255);
-  pixels.setPixelColor(1, 255, 255, 255);
+  pixels.setPixelColor(0, eyeColor);
+  pixels.setPixelColor(1, eyeColor);
   pixels.show();
 }
-
