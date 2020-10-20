@@ -11,7 +11,7 @@ const int touch = A3;
 ////////////////////////////////////////////////////////
 const int toneRange[] = {500, 5000}; // 저음, 고음
 int soundThreshold = 30; // 사운드 센서 민감도
-int sleepDuration = 10000; // 대화가 없을 때 잠자기까지의 시간
+int sleepDuration = 30000; // 대화가 없을 때 잠자기까지의 시간
 ////////////////////////////////////////////////////////
 
 float soundValue = 0.0f;
