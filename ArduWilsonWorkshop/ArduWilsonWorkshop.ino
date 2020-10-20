@@ -81,7 +81,7 @@ void checkSound() {
     digitalWrite(statusLED, LOW);
 
     finishCount++;
-    if (finishCount == 30) {
+    if (finishCount == 10) {
       if (listeningCount > 5) {
         Serial.println("[SAY]");
         sayRandom();
