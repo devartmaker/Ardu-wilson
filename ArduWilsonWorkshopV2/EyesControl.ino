@@ -1,9 +1,9 @@
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(2, 9, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(2, neopixel, NEO_RGB + NEO_KHZ800);
 
 int eyeTimerId = -1;
 int tgBrightness, brightness;
 bool blink = false;
-uint32_t eyeColor = pixels.Color(255, 228, 200); //R, G, B (0 ~ 255)
+uint32_t eyeColor = pixels.Color(255, 228, 200);
 
 void initEyes() {
   pixels.begin();

@@ -4,15 +4,16 @@
 #include "EEPROM.h"
 
 const int statusLED = 13;
+const int neopixel = A0;
 const int mic = A1;
 const int buzzer = A2;
-const int touch = A3;
-const int sensitivity = A6;
+
 
 ////////////////////////////////////////////////////////
 const int toneRange[] = {500, 5000}; // 저음, 고음
 int soundThreshold = 5; // 사운드 센서 민감도
 int sleepDuration = 30000; // 대화가 없을 때 잠자기까지의 시간
+int waitCount = 20; // 듣고 나서 말하기까지 기다리는 시간
 ////////////////////////////////////////////////////////
 
 float soundValue = 0.0f;
@@ -29,7 +30,6 @@ void sing();
 SimpleTimer timer, eyeTimer;
 
 boolean playedMusic = true;
-int normalVolume = 512;
 
 void setup() {
   Serial.begin(9600);
@@ -50,8 +50,9 @@ void loop() {
 void checkTouching() {
   if (isRunning) return;
 
-  int t = analogRead(touch);
-
+  int t = analogRead(buzzer);
+  // Serial.println(soundValue);
+  
   if (t > 100) {
     isRunning = true;
 
@@ -70,10 +71,10 @@ void checkTouching() {
 void checkSound() {
   if (talking || !isRunning) return;
 
-  int v = abs(normalVolume - analogRead(mic));
-  
+  int v = abs(512 - analogRead(mic));
   soundValue += (v - soundValue) * 0.02f;
-
+  // Serial.println(soundValue);
+  
   if (soundValue > soundThreshold) {
     listeningCount++;
     digitalWrite(statusLED, HIGH);
@@ -84,7 +85,7 @@ void checkSound() {
     digitalWrite(statusLED, LOW);
 
     finishCount++;
-    if (finishCount == 10) {
+    if (finishCount == waitCount) {
       if (listeningCount > 5) {
         Serial.println("[SAY]");
         sayRandom();
