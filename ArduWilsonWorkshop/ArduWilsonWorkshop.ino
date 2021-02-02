@@ -7,7 +7,6 @@ const int statusLED = 13;
 const int mic = A1;
 const int buzzer = A2;
 const int touch = A3;
-const int sensitivity = A6;
 
 ////////////////////////////////////////////////////////
 const int toneRange[] = {500, 5000}; // 저음, 고음
@@ -84,7 +83,7 @@ void checkSound() {
     digitalWrite(statusLED, LOW);
 
     finishCount++;
-    if (finishCount == 10) {
+    if (finishCount == 20) {
       if (listeningCount > 5) {
         Serial.println("[SAY]");
         sayRandom();
