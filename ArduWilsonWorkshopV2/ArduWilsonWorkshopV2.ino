@@ -8,7 +8,6 @@ const int neopixel = A0;
 const int mic = A1;
 const int buzzer = A2;
 
-
 ////////////////////////////////////////////////////////
 const int toneRange[] = {500, 5000}; // 저음, 고음
 int soundThreshold = 5; // 사운드 센서 민감도
@@ -51,7 +50,7 @@ void checkTouching() {
   if (isRunning) return;
 
   int t = analogRead(buzzer);
-  // Serial.println(soundValue);
+  // Serial.println(t);
   
   if (t > 100) {
     isRunning = true;
