@@ -15,7 +15,7 @@ void initEyes() {
 }
 
 void openEyes() {
-  tgBrightness = 50;
+  tgBrightness = 30;
   pixels.setPixelColor(0, eyeColor);
   pixels.setPixelColor(1, eyeColor);
   pixels.show();

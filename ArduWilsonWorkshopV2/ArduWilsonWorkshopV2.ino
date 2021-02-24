@@ -12,7 +12,7 @@ const int buzzer = A2;
 const int toneRange[] = {500, 5000}; // 저음, 고음
 int soundThreshold = 5; // 사운드 센서 민감도
 int sleepDuration = 30000; // 대화가 없을 때 잠자기까지의 시간
-int waitCount = 20; // 듣고 나서 말하기까지 기다리는 시간
+int waitCount = 10; // 듣고 나서 말하기까지 기다리는 시간
 ////////////////////////////////////////////////////////
 
 float soundValue = 0.0f;
