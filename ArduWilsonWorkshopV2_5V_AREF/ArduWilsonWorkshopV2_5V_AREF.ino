@@ -9,13 +9,13 @@ const int mic = A1;
 const int buzzer = A2;
 
 ////////////////////////////////////////////////////////
-const int silentValue = 512; // 사운드 없을 때 사운드 센싱 값
 const int toneRange[] = {500, 5000}; // 저음, 고음
-int soundThreshold = 5; // 사운드 센서 민감도
+int soundThreshold = 2; // 사운드 센서 민감도
 int sleepDuration = 30000; // 대화가 없을 때 잠자기까지의 시간
 int waitCount = 10; // 듣고 나서 말하기까지 기다리는 시간
 ////////////////////////////////////////////////////////
 
+int silentValue;
 float soundValue = 0.0f;
 int listeningCount = 0, finishCount = 0;
 bool listening = false;
@@ -33,11 +33,13 @@ boolean playedMusic = true;
 
 void setup() {
   Serial.begin(9600);
-  analogReference(EXTERNAL);
+
   randomSeed(analogRead(A0));
   pinMode(statusLED, OUTPUT);
 
   initEyes();
+
+  initSound();
   timer.setInterval(2, checkTouching);
   timer.setInterval(25, checkSound);
 }
@@ -47,13 +49,29 @@ void loop() {
   eyeTimer.run();
 }
 
+void initSound() {
+  long micValue = 0;
+
+  int checkCount = 20;
+  for (int i = 0; i < checkCount; i++) {
+    int v = analogRead(mic);
+    micValue += v;
+    digitalWrite(statusLED, !digitalRead(statusLED));
+    delay(50);
+  }
+
+  silentValue = micValue / checkCount;
+  Serial.print("silentValue = ");
+  Serial.println(silentValue);
+}
+
 void checkTouching() {
   if (isRunning) return;
 
   int t = analogRead(buzzer);
   // Serial.println(t);
 
-  if (t > 50) {
+  if (t > 70) {
     isRunning = true;
 
     if (EEPROM.read(0) != 0) {
@@ -74,10 +92,11 @@ void checkSound() {
   int micValue = analogRead(mic);
   int v = abs(silentValue - micValue);
   soundValue += (v - soundValue) * 0.02f;
+  
   /*
   Serial.print(micValue);
   Serial.print(',');
-  Serial.println(soundValue);
+  Serial.println(v);
   */
   
   if (soundValue > soundThreshold) {
