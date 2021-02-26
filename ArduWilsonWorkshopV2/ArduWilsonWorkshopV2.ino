@@ -4,7 +4,7 @@
 #include "EEPROM.h"
 
 const int statusLED = 13;
-const int neopixel = A0;
+const int neopixel = 9;
 const int mic = A1;
 const int buzzer = A2;
 
@@ -34,7 +34,7 @@ boolean playedMusic = true;
 void setup() {
   Serial.begin(9600);
   analogReference(EXTERNAL);
-  randomSeed(analogRead(A0));
+
   pinMode(statusLED, OUTPUT);
 
   initEyes();
