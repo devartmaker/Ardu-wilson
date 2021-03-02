@@ -34,7 +34,6 @@ boolean playedMusic = true;
 void setup() {
   Serial.begin(9600);
   analogReference(EXTERNAL);
-
   pinMode(statusLED, OUTPUT);
 
   initEyes();
