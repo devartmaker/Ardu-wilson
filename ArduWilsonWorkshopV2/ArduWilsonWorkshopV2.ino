@@ -50,15 +50,15 @@ void checkTouching() {
   if (isRunning) return;
 
   int t = analogRead(buzzer);
-  // Serial.println(t);
+//   Serial.println(t);
 
-  if (t > 50) {
+  if (t > 150) {
     isRunning = true;
 
-    if (EEPROM.read(0) != 0) {
+    if (EEPROM.read(0) != 1) {
       delay(1000);
       sing();
-      EEPROM.write(0, 0);
+      EEPROM.write(0, 1);
     } else {
       startSleepTimer();
     }
@@ -73,6 +73,7 @@ void checkSound() {
   int micValue = analogRead(mic);
   int v = abs(silentValue - micValue);
   soundValue += (v - soundValue) * 0.02f;
+
   /*
   Serial.print(micValue);
   Serial.print(',');
