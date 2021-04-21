@@ -1,6 +1,6 @@
 #include "pitches.h"
 
-const int buzzer = 6;
+const int buzzer = A2;
 
 void setup() {
   Serial.begin(9600);
